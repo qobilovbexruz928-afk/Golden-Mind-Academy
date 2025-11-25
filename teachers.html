@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>O'qituvchilar - GoldenMind Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #ffffff;
+        }
+
+        /* Header Styles */
+        header {
+            background: #1e40af;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(30, 64, 175, 0.3);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Hero Section */
+        .page-hero {
+            margin-top: 80px;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            padding: 6rem 2rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .page-hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image:hover {
+            transform: translateY(-5px);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Teachers Grid */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .teachers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .teacher-card {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            border: 2px solid #f1f5f9;
+            position: relative;
+        }
+
+        .teacher-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(30, 64, 175, 0.15);
+            border-color: #3b82f6;
+        }
+
+        .teacher-photo {
+            height: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .teacher-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .teacher-card:hover .teacher-photo img {
+            transform: scale(1.05);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.7), rgba(59, 130, 246, 0.5));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .teacher-card:hover .photo-overlay {
+            opacity: 1;
+        }
+
+        .view-profile {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .teacher-info {
+            padding: 2.5rem;
+        }
+
+        .teacher-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+        .teacher-title {
+            color: #3b82f6;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .teacher-bio {
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .teacher-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-tag {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: #3b82f6;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .teacher-stats {
+            padding-top: 1.5rem;
+            border-top: 2px solid #f1f5f9;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .stat-number {
+            color: #1e40af;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .contact-teacher-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-teacher-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: popup 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        @keyframes popup {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-modal {
+            font-size: 2rem;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            cursor: pointer;
+            color: #64748b;
+            transition: color 0.3s;
+            background: none;
+            border: none;
+        }
+
+        .close-modal:hover {
+            color: #1e40af;
+        }
+
+        .teacher-modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .teacher-modal-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            border: 4px solid #f1f5f9;
+        }
+
+        .teacher-modal-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal h2 {
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .modal-teacher-title {
+            color: #3b82f6;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .experience-section {
+            margin-top: 2rem;
+        }
+
+        .experience-section h3 {
+            color: #1e40af;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 0.5rem;
+        }
+
+        .experience-item {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .experience-item h4 {
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .experience-item p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e293b;
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #3b82f6;
+        }
+
+        .footer-links h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: #3b82f6;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #3b82f6;
+        }
+
+        .contact-info {
+            margin-top: 1rem;
+            color: #cbd5e1;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copyright {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-images {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .hero-image img {
+                height: 150px;
+            }
+            
+            .teachers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .teacher-stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                GoldenMind Academy
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Bosh sahifa</a></li>
+                <li><a href="courses.html">Kurslar</a></li>
+                <li><a href="teachers.html">O'qituvchilar</a></li>
+                <li><a href="about.html">Biz haqimizda</a></li>
+                <li><a href="contact.html">Bog'lanish</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Yangi Hero Section -->
+    <section class="page-hero">
+        <div class="hero-content">
+            <h1>Bizning Professional O'qituvchilar</h1>
+            <p>Sanoat mutaxassislari bilan dasturlash sirlarini o'rganing</p>
+            
+            <div class="hero-images">
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" 
+                         alt="O'qituvchilar jamoasi">
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                         alt="Individual darslar">
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                         alt="Amaliy mashg'ulotlar">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="teachers-grid">
+            <!-- Aliyev Sardor -->
+            <article class="teacher-card">
+                <div class="teacher-photo">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Aliyev Sardor - Senior Frontend Developer">
+                    <div class="photo-overlay">
+                        <span class="view-profile">Profilni Ko'rish</span>
+                    </div>
+                </div>
+                <div class="teacher-info">
+                    <div class="teacher-name">Aliyev Sardor</div>
+                    <div class="teacher-title">Senior Frontend Developer</div>
+                    <p class="teacher-bio">7 yillik tajribaga ega professional frontend dasturchi. React.js va zamonaviy web texnologiyalari bo'yicha mutaxassis.</p>
+                    <div class="teacher-skills">
+                        <span class="skill-tag">React.js</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">CSS</span>
+                    </div>
+                    <div class="teacher-stats">
+                        <div><div class="stat-number">7+</div><div class="stat-label">Yil tajriba</div></div>
+                        <div><div class="stat-number">150+</div><div class="stat-label">O'quvchilar</div></div>
+                        <div><div class="stat-number">4.9</div><div class="stat-label">Reyting</div></div>
+                    </div>
+                    <button class="contact-teacher-btn" onclick="showTeacherDetails('Aliyev Sardor','Senior Frontend Developer','frontend')">
+                        <i class="fas fa-user-circle"></i>
+                        Batafsil Ma'lumot
+                    </button>
+                </div>
+            </article>
+
+            <!-- Karimova Nilufar -->
+            <article class="teacher-card">
+                <div class="teacher-photo">
+                    <img src="https://images.unsplash.com/photo-1618835962148-cf177563c6c0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fGh1bWFufGVufDB8fDB8fHww" alt="Karimova Nilufar - Backend Development Expert">
+                    <div class="photo-overlay">
+                        <span class="view-profile">Profilni Ko'rish</span>
+                    </div>
+                </div>
+                <div class="teacher-info">
+                    <div class="teacher-name">Karimova Nilufar</div>
+                    <div class="teacher-title">Backend Development Expert</div>
+                    <p class="teacher-bio">Node.js va ma'lumotlar bazalari bo'yicha 6 yillik tajribaga ega. Xalqaro loyihalarda qatnashgan mutaxassis.</p>
+                    <div class="teacher-skills">
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">Express</span>
+                    </div>
+                    <div class="teacher-stats">
+                        <div><div class="stat-number">6+</div><div class="stat-label">Yil tajriba</div></div>
+                        <div><div class="stat-number">130+</div><div class="stat-label">O'quvchilar</div></div>
+                        <div><div class="stat-number">4.8</div><div class="stat-label">Reyting</div></div>
+                    </div>
+                    <button class="contact-teacher-btn" onclick="showTeacherDetails('Karimova Nilufar','Backend Development Expert','backend')">
+                        <i class="fas fa-user-circle"></i>
+                        Batafsil Ma'lumot
+                    </button>
+                </div>
+            </article>
+
+            <!-- Rahimov Jasur -->
+            <article class="teacher-card">
+                <div class="teacher-photo">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Rahimov Jasur - Full Stack Developer">
+                    <div class="photo-overlay">
+                        <span class="view-profile">Profilni Ko'rish</span>
+                    </div>
+                </div>
+                <div class="teacher-info">
+                    <div class="teacher-name">Rahimov Jasur</div>
+                    <div class="teacher-title">Full Stack Developer</div>
+                    <p class="teacher-bio">Frontend va Backend sohasida keng tajribaga ega. MERN stack mutaxassisi va 8 yillik amaliy tajriba.</p>
+                    <div class="teacher-skills">
+                        <span class="skill-tag">MERN Stack</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">DevOps</span>
+                    </div>
+                    <div class="teacher-stats">
+                        <div><div class="stat-number">8+</div><div class="stat-label">Yil tajriba</div></div>
+                        <div><div class="stat-number">200+</div><div class="stat-label">O'quvchilar</div></div>
+                        <div><div class="stat-number">5.0</div><div class="stat-label">Reyting</div></div>
+                    </div>
+                    <button class="contact-teacher-btn" onclick="showTeacherDetails('Rahimov Jasur','Full Stack Developer','fullstack')">
+                        <i class="fas fa-user-circle"></i>
+                        Batafsil Ma'lumot
+                    </button>
+                </div>
+            </article>
+
+            <!-- Usmanova Madina -->
+            <article class="teacher-card">
+                <div class="teacher-photo">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80" alt="Usmanova Madina - Python & AI Specialist">
+                    <div class="photo-overlay">
+                        <span class="view-profile">Profilni Ko'rish</span>
+                    </div>
+                </div>
+                <div class="teacher-info">
+                    <div class="teacher-name">Usmanova Madina</div>
+                    <div class="teacher-title">Python & AI Specialist</div>
+                    <p class="teacher-bio">Python va sun'iy intellekt sohasida 5 yillik tajriba. Ma'lumotlar tahlili va machine learning bo'yicha mutaxassis.</p>
+                    <div class="teacher-skills">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Data Science</span>
+                    </div>
+                    <div class="teacher-stats">
+                        <div><div class="stat-number">5+</div><div class="stat-label">Yil tajriba</div></div>
+                        <div><div class="stat-number">120+</div><div class="stat-label">O'quvchilar</div></div>
+                        <div><div class="stat-number">4.9</div><div class="stat-label">Reyting</div></div>
+                    </div>
+                    <button class="contact-teacher-btn" onclick="showTeacherDetails('Usmanova Madina','Python & AI Specialist','python')">
+                        <i class="fas fa-user-circle"></i>
+                        Batafsil Ma'lumot
+                    </button>
+                </div>
+            </article>
+
+            <!-- Toshmatov Otabek -->
+            <article class="teacher-card">
+                <div class="teacher-photo">
+                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Toshmatov Otabek - Mobile Development Expert">
+                    <div class="photo-overlay">
+                        <span class="view-profile">Profilni Ko'rish</span>
+                    </div>
+                </div>
+                <div class="teacher-info">
+                    <div class="teacher-name">Toshmatov Otabek</div>
+                    <div class="teacher-title">Mobile Development Expert</div>
+                    <p class="teacher-bio">React Native va Flutter dasturchi. iOS va Android ilovalar yaratishda 6 yillik amaliy tajriba.</p>
+                    <div class="teacher-skills">
+                        <span class="skill-tag">React Native</span>
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">iOS</span>
+                        <span class="skill-tag">Android</span>
+                    </div>
+                    <div class="teacher-stats">
+                        <div><div class="stat-number">6+</div><div class="stat-label">Yil tajriba</div></div>
+                        <div><div class="stat-number">140+</div><div class="stat-label">O'quvchilar</div></div>
+                        <div><div class="stat-number">4.8</div><div class="stat-label">Reyting</div></div>
+                    </div>
+                    <button class="contact-teacher-btn" onclick="showTeacherDetails('Toshmatov Otabek','Mobile Development Expert','mobile')">
+                        <i class="fas fa-user-circle"></i>
+                        Batafsil Ma'lumot
+                    </button>
+                </div>
+            </article>
+
+            <!-- Ergasheva Zarina -->
+            <article class="teacher-card">
+                <div class="teacher-photo">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Ergasheva Zarina - UI/UX Design Lead">
+                    <div class="photo-overlay">
+                        <span class="view-profile">Profilni Ko'rish</span>
+                    </div>
+                </div>
+                <div class="teacher-info">
+                    <div class="teacher-name">Ergasheva Zarina</div>
+                    <div class="teacher-title">UI/UX Design Lead</div>
+                    <p class="teacher-bio">Dizayn bo'yicha 7 yillik tajriba. Figma va Adobe XD mutaxassisi. Yuzlab loyihalarni muvaffaqiyatli yakunlagan.</p>
+                    <div class="teacher-skills">
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Adobe XD</span>
+                        <span class="skill-tag">UI/UX</span>
+                        <span class="skill-tag">Prototyping</span>
+                    </div>
+                    <div class="teacher-stats">
+                        <div><div class="stat-number">7+</div><div class="stat-label">Yil tajriba</div></div>
+                        <div><div class="stat-number">180+</div><div class="stat-label">O'quvchilar</div></div>
+                        <div><div class="stat-number">5.0</div><div class="stat-label">Reyting</div></div>
+                    </div>
+                    <button class="contact-teacher-btn" onclick="showTeacherDetails('Ergasheva Zarina','UI/UX Design Lead','design')">
+                        <i class="fas fa-user-circle"></i>
+                        Batafsil Ma'lumot
+                    </button>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal" id="teacherModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <div class="teacher-modal-header">
+                <div class="teacher-modal-photo">
+                    <img id="modalPhotoImg" src="" alt="">
+                </div>
+                <h2 id="modalName"></h2>
+                <p class="modal-teacher-title" id="modalTitle"></p>
+            </div>
+
+            <div class="experience-section">
+                <h3>Ish Tajribasi</h3>
+                <div id="experienceContent"></div>
+            </div>
+
+            <div class="experience-section">
+                <h3>Ta'lim</h3>
+                <div id="educationContent"></div>
+            </div>
+
+            <div class="experience-section">
+                <h3>Loyihalar</h3>
+                <div id="projectsContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>GoldenMind Academy</h3>
+                <p>IT ta'lim sohasida yetakchi markaz. Biz sizga professional dasturchi bo'lish yo'lida yordam beramiz.</p>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> +998 90 123 45 67</p>
+                    <p><i class="fas fa-envelope"></i> info@goldenmind.uz</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Navoiy shahri, Navoiy tumani</p>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Tez Havolalar</h4>
+                <ul>
+                    <li><a href="index.html">Bosh sahifa</a></li>
+                    <li><a href="courses.html">Kurslar</a></li>
+                    <li><a href="teachers.html">O'qituvchilar</a></li>
+                    <li><a href="about.html">Biz haqimizda</a></li>
+                    <li><a href="contact.html">Bog'lanish</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Kurslar</h4>
+                <ul>
+                    <li><a href="#">Frontend Development</a></li>
+                    <li><a href="#">Backend Development</a></li>
+                    <li><a href="#">Full Stack Development</a></li>
+                    <li><a href="#">Mobile Development</a></li>
+                    <li><a href="#">Data Science</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 GoldenMind Academy. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Teacher data (sizning ma'lumotlaringizni saqlab qoldim)
+        const teacherData = {
+            frontend: {
+                experience: [
+                    { title: 'Senior Frontend Developer - Tech Solutions', desc: '2020-2024, Xalqaro loyihalarda ishlash va murakkab UI komponentlar yaratish' },
+                    { title: 'Frontend Developer - StartupHub', desc: '2017-2020, Tezkor web ilovalar va komponent kutubxonalar ishlab chiqish' }
+                ],
+                education: [
+                    { title: "TATU - Dasturiy injiniring", desc: 'Bakalavr, 2013-2017' },
+                    { title: 'Meta Frontend Developer', desc: 'Professional Certificate, 2019' }
+                ],
+                projects: [
+                    { title: 'E-commerce Platform', desc: 'React.js va Redux yordamida yuqori yuklamali onlayn-doʻkon' },
+                    { title: 'Social Media Dashboard', desc: 'Next.js va TypeScript bilan tezkor dashboard' }
+                ]
+            },
+            backend: {
+                experience: [
+                    { title: 'Backend Team Lead - Digital Agency', desc: '2019-2024, Backend arxitektura va jamoa boshqaruvi' },
+                    { title: 'Node.js Developer - CloudTech', desc: '2018-2019, API development va optimizatsiya' }
+                ],
+                education: [
+                    { title: 'TATU - Kompyuter ilmlari', desc: 'Bakalavr, 2014-2018' },
+                    { title: 'AWS Certified Developer', desc: 'Professional Certificate, 2020' }
+                ],
+                projects: [
+                    { title: 'Banking API System', desc: 'Node.js va PostgreSQL asosidagi xavfsiz API' },
+                    { title: 'Microservices Architecture', desc: 'Docker va Kubernetes yordamida modul arxitektura' }
+                ]
+            },
+            fullstack: {
+                experience: [
+                    { title: "Full Stack Lead - Tech Innovators", desc: "2020-2024, To'liq stack development va jamoani qo'llab-quvvatlash" },
+                    { title: 'Full Stack Developer - WebCorp', desc: '2016-2020, MERN stack loyihalar va real-time yechimlar' }
+                ],
+                education: [
+                    { title: 'TATU - Axborot texnologiyalari', desc: 'Bakalavr, 2012-2016' },
+                    { title: 'Full Stack Web Development', desc: 'Coursera Certificate, 2017' }
+                ],
+                projects: [
+                    { title: 'Project Management System', desc: 'MERN Stack bilan kooperativ boshqaruv tizimi' },
+                    { title: 'Real-time Chat Application', desc: "Socket.io va React yordamida real vaqtda chat" }
+                ]
+            },
+            python: {
+                experience: [
+                    { title: 'Data Scientist - AI Solutions', desc: '2020-2024, Machine Learning loyihalar, model deploy' },
+                    { title: 'Python Developer - DataTech', desc: '2019-2020, Django web development va ETL jarayonlari' }
+                ],
+                education: [
+                    { title: "TATU - Sun'iy intellekt", desc: "Magistr, 2017-2019" },
+                    { title: 'Machine Learning Specialization', desc: 'Stanford University, 2020' }
+                ],
+                projects: [
+                    { title: 'Predictive Analytics System', desc: 'Python va Scikit-learn asosida biznes bashoratlari' },
+                    { title: 'NLP Text Analyzer', desc: 'TensorFlow va NLTK yordamida matnlarni tahlil qilish' }
+                ]
+            },
+            mobile: {
+                experience: [
+                    { title: 'Mobile Team Lead - AppFactory', desc: '2020-2024, iOS va Android ilovalar ishlab chiqish va jamoa boshqaruvi' },
+                    { title: 'React Native Developer - MobileHub', desc: '2018-2020, Cross-platform apps va perf optimizatsiya' }
+                ],
+                education: [
+                    { title: 'TATU - Mobil dasturlash', desc: 'Bakalavr, 2014-2018' },
+                    { title: 'iOS Developer Nanodegree', desc: 'Udacity, 2019' }
+                ],
+                projects: [
+                    { title: 'Fitness Tracking App', desc: 'React Native bilan real vaqt ma\'lumotlar to\'plash' },
+                    { title: 'Food Delivery Platform', desc: 'Flutter va Firebase yordamida buyurtma tizimi' }
+                ]
+            },
+            design: {
+                experience: [
+                    { title: 'Lead UI/UX Designer - DesignStudio', desc: '2020-2024, Digital products dizayni va brend tizimlarini yaratish' },
+                    { title: 'UI/UX Designer - Creative Agency', desc: '2017-2020, Web va mobil dizayn loyihalari' }
+                ],
+                education: [
+                    { title: 'TATU - Multimedia dizayn', desc: 'Bakalavr, 2013-2017' },
+                    { title: 'Google UX Design Certificate', desc: 'Professional Certificate, 2018' }
+                ],
+                projects: [
+                    { title: 'Banking App Redesign', desc: 'Figma asosida foydalanuvchi tajribasini yaxshilash' },
+                    { title: 'E-learning Platform UI', desc: 'Design System yaratish va prototyping' }
+                ]
+            }
+        };
+
+        // Teacher photo mapping
+        const teacherPhotos = {
+            'Aliyev Sardor': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+            'Karimova Nilufar': 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fGh1bWFufGVufDB8fDB8fHww',
+            'Rahimov Jasur': 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+            'Usmanova Madina': 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80',
+            'Toshmatov Otabek': 'https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+            'Ergasheva Zarina': 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
+        };
+
+        function showTeacherDetails(name, title, type) {
+            const modal = document.getElementById('teacherModal');
+            document.getElementById('modalName').textContent = name;
+            document.getElementById('modalTitle').textContent = title;
+
+            // Set modal photo
+            const modalPhotoImg = document.getElementById('modalPhotoImg');
+            modalPhotoImg.src = teacherPhotos[name] || '';
+            modalPhotoImg.alt = `${name} - ${title}`;
+
+            const data = teacherData[type] || { experience: [], education: [], projects: [] };
+
+            // Experience
+            let experienceHTML = '';
+            data.experience.forEach(exp => {
+                experienceHTML += `
+                    <div class="experience-item">
+                        <h4>${escapeHtml(exp.title)}</h4>
+                        <p>${escapeHtml(exp.desc)}</p>
+                    </div>
+                `;
+            });
+            document.getElementById('experienceContent').innerHTML = experienceHTML || '<p style="color:#666;">Ma\'lumot mavjud emas.</p>';
+
+            // Education
+            let educationHTML = '';
+            data.education.forEach(edu => {
+                educationHTML += `
+                    <div class="experience-item">
+                        <h4>${escapeHtml(edu.title)}</h4>
+                        <p>${escapeHtml(edu.desc)}</p>
+                    </div>
+                `;
+            });
+            document.getElementById('educationContent').innerHTML = educationHTML || '<p style="color:#666;">Ma\'lumot mavjud emas.</p>';
+
+            // Projects
+            let projectsHTML = '';
+            data.projects.forEach(proj => {
+                projectsHTML += `
+                    <div class="experience-item">
+                        <h4>${escapeHtml(proj.title)}</h4>
+                        <p>${escapeHtml(proj.desc)}</p>
+                    </div>
+                `;
+            });
+            document.getElementById('projectsContent').innerHTML = projectsHTML || '<p style="color:#666;">Ma\'lumot mavjud emas.</p>';
+
+            // Show modal
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('teacherModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close when click outside content
+        window.addEventListener('click', function(event){
+            const modal = document.getElementById('teacherModal');
+            if (event.target === modal) closeModal();
+        });
+
+        // Close on Escape key
+        window.addEventListener('keydown', function(event){
+            const modal = document.getElementById('teacherModal');
+            if (event.key === 'Escape' && modal.style.display === 'flex') {
+                closeModal();
+            }
+        });
+
+        function escapeHtml(text){
+            return String(text)
+            .replace(/&/g,'&amp;')
+            .replace(/</g,'&lt;')
+            .replace(/>/g,'&gt;')
+            .replace(/"/g,'&quot;')
+            .replace(/'/g,'&#039;');
+        }
+    </script>
+</body>
+</html>
